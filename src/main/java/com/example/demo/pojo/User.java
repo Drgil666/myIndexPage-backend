@@ -27,4 +27,5 @@ public class User
      * 收藏夹的MongoId
      */
     private String bookmark;
+    private String nick;
 }

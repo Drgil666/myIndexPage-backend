@@ -1,4 +1,5 @@
 package com.example.demo.service.impl;
+import com.example.demo.dao.BcryptDao;
 import com.example.demo.mapper.UserMapper;
 import com.example.demo.pojo.User;
 import com.example.demo.service.UserService;
@@ -13,6 +14,8 @@ import javax.annotation.Resource;
 public class UserServiceImpl implements UserService {
     @Resource
     private UserMapper userMapper;
+    @Resource
+    private BcryptDao bcryptDao;
     /**
      * 创建用户
      *
@@ -21,6 +24,7 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public Boolean createUser (User user) {
+        user.setPassword (bcryptDao.encode (user.getPassword ()));
         return userMapper.createUser (user);
     }
     /**
@@ -31,6 +35,7 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public Long updateUser (User user) {
+        user.setPassword (bcryptDao.encode (user.getPassword ()));
         return userMapper.updateUser (user);
     }
     /**
@@ -61,6 +66,6 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public Boolean isExist (String username) {
-        return userMapper.isExist (username)>0;
+        return userMapper.isExist (username) > 0;
     }
 }

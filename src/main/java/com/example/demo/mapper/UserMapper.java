@@ -15,7 +15,7 @@ public interface UserMapper {
      * @return 创建好的用户
      */
     @Options (useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
-    @Insert ("insert into user (username,password,img,bookmark) values (#{user.username},#{user.password},#{user.img},#{user.bookmark})")
+    @Insert ("insert into user (username,password,img,bookmark,nick) values (#{user.username},#{user.password},#{user.img},#{user.bookmark},#{user.nick})")
     Boolean createUser (@Param ("user") User user);
     /**
      * 更新用户
@@ -23,7 +23,7 @@ public interface UserMapper {
      * @param user 用户
      * @return 更新好的用户
      */
-    @Update ("update user set username=#{user.username},password=#{user.password},bookmark=#{user.bookmark},img=#{user.img} where id=#{user.id}")
+    @Update ("update user set username=#{user.username},password=#{user.password},bookmark=#{user.bookmark},img=#{user.img},nick=#{user.nick} where id=#{user.id}")
     Long updateUser (@Param ("user") User user);
     /**
      * 通过id获取用户
